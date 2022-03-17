@@ -1,0 +1,2 @@
+# deleteMultipleData
+deleteMultipleData
