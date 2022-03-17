@@ -1,7 +1,7 @@
 <?php
 require 'connection.php';
-if(isset($_POST['delete']) && isset($_POST["deleteId"])){
-  foreach($_POST['deleteId'] as $deleteId){
+if(isset($_POST["delete"]) && isset($_POST["deleteId"])){
+  foreach($_POST["deleteId"] as $deleteId){
     $delete = "DELETE FROM tb_data WHERE id = $deleteId";
     mysqli_query($conn, $delete);
   }
@@ -21,20 +21,18 @@ if(isset($_POST['delete']) && isset($_POST["deleteId"])){
           <td>#</td>
           <td>Name</td>
           <td>Age</td>
-          <td>Country</td>
         </tr>
         <?php
         $rows = mysqli_query($conn, "SELECT * FROM tb_data");
         $i = 1;
+        foreach($rows as $row) :
         ?>
-        <?php foreach($rows as $row) : ?>
-          <tr>
-            <td align = center> <input type="checkbox" name="deleteId[]" value="<?php echo $row['id']; ?>"> </td>
-            <td><?php echo $i++; ?></td>
-            <td><?php echo $row["name"]; ?></td>
-            <td><?php echo $row["age"]; ?></td>
-            <td><?php echo $row["country"]; ?></td>
-          </tr>
+        <tr>
+          <td align = center> <input type="checkbox" name="deleteId[]" value="<?php echo $row['id']; ?>"> </td>
+          <td><?php echo $i++; ?></td>
+          <td><?php echo $row["name"]; ?></td>
+          <td><?php echo $row["age"]; ?></td>
+        </tr>
         <?php endforeach; ?>
       </form>
     </table>
